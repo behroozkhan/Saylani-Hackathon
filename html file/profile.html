@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="../css file/profile.css">
+</head>
+
+<body>
+
+ <div class="head-middle-container"> <!-- Added head-middle-center class -->
+  <div class="middle-container">
+      <a href="../index.html"><img id="main-logo" src="../images/bolt.png" alt="logo"></a>
+      <h3>Heckhaton</h3>
+  </div>
+
+  <div class="logout-container">
+          <button id="logout-btn">Logout</button>
+ 
+  </div>
+</div>
+
+<main class="container">
+  <div class="card">
+    <img id="user-profile" src="" alt="User image" class="card__image" />
+    <label class="camera-icon" for="file-input">
+      <img  src="../images/camera.svg" alt="camera icon">
+  </label>
+  <input type="file" style="display: none;" id="file-input">
+    <div class="card__text">
+
+      <h2 id="name"></h2>
+      <h2 id="userName"></h2>
+      <h3 id="email"></h3>
+    </div>
+     <br><br>
+   
+    <div class="card__action">
+      <button class="card__action__button card__action--follow" id="update-profile">Update Profile</button>
+    </div>
+  </div>
+</main>
+  
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" src="../js file/profile.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css file/style.css">
+</head>
+<body>
+    <nav>
+        <p class="logo">Personal Blogging App</p>
+        <div class="auth-btn">
+            <ul>
+                <li><a href="./html file/profile.html">Profiel</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="heading">
+        <h1 class="head-name">Dashboard</h1>
+    </div>
+    <div class="container">
+        <div class="card">
+            <form id="post_form">
+                <div class="input-post">
+                    <!-- <label for="exampleInputEmail1" class="form-label">Post Title</label> -->
+                    <input id = "post_title" type="text" class="form-control" placeholder="Title">
+                </div>
+                <div class="input-des">
+                    <!-- <label for="post_desc" class="form-label">Post Description</label> -->
+                    <textarea id="post_desc" class="form-control" rows="4" placeholder="Description"></textarea>
+                    <img id="img-user" src="" alt="">
+                  </div>
+                <button type="submit" class="btn btn-primary" >Publish</button>
+            </form>
+        </div>
+    </div>
+    <div class="container-body">
+    </div>
+<script type="module" src="../js file/app.js"></script>
+</body>
+</html>

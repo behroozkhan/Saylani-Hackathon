@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../css file/login.css">
+  <!-- font owesome link -->
+  <link href="https://fonts.googleapis.com/css2?family=Playball&family=Source+Sans+Pro:wght@600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <main>
+    <section>
+      <div class="login-container">
+        <div class="card-login">
+          <div class="head">
+            <h1>Login In:</h1>
+          </div>
+          <div class="login-input-container">
+            <div class="user-input">
+              <input type="text" id="username-login" placeholder="username or email"
+                pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]*|[a-zA-Z0-9]+" required>
+            </div>
+            <div class="pass-input">
+              <input type="password" id="password-login" placeholder="password" pattern=".{8,}" required>
+            </div>
+          </div>
+          <p id="result"></p>
+          
+          <div class="btn">
+            <button id="login-btn" class="button-bk">login</button>
+          </div>
+          <p id="message-or">Or login with</p>
+          <div class="website-opt">
+            <a href="www.google.com">
+              <img id="img-google" src="../images/googlesvg2.png" alt="google svg">
+            </a>
+            <a href="www.facebook.com">
+              <img id="img-facebook" src="../images/facebooksvg-3.svg" alt="facebook svg">
+            </a>
+          </div>
+          <p>Create Account!
+            <a href="../html file/register.html">Register</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="../script.js"></script>
+  <script  type="module" src="../js file/login.js"></script>
+</body>
+
+</html>
+
+
+<!-- <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login And Sign Up Page</title>
+    <link rel="stylesheet" href="./login page code/style.css">
+    <link rel="stylesheet" href="./sign page/style.css">
+    <link rel="stylesheet" href="../css structure/login.css">
+</head>
+
+<body>
+
+    <h1>Login Page:</h1>
+    <div class="login-container">
+        <label>User Name:</label>
+        <input type="text" id="userName">
+        <label>Password</label>
+        <input type="password" id="password">
+    </div>
+    <button onclick="loginPage()">Login Page</button>
+    <button onclick="signIn()">Sign In</button>
+    <p id="result"></p>
+
+    <script src="../js structure/common.js"></script>
+    <script src="./login page code/script.js"></script>
+    <script src="./sign page/app.js"></script>
+</body> -->
+
+<!-- </html> -->

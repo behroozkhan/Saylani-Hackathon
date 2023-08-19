@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="../css file/register.css">
+</head>
+
+<body>
+
+
+  <div class="container">
+    <div class="main">
+      <form class="form" id="signup-form">
+        <div class="form-input">
+          <input type="text" id="name" placeholder="Full Name" required="">
+        </div>
+        <div class="form-input">
+          <input type="text" id="username" placeholder="Username" required="">
+        </div>
+        <div class="form-input">
+          <input type="email" id="email" placeholder="Email" required="">
+        </div>
+        <div class="form-input">
+          <input type="password" id="password" placeholder="Password" required="">
+        </div>
+        <div class="form-input">
+          <input type="password" id="c-password" placeholder="Confirm Password" required="">
+        </div>
+        <p id="permission">
+          <input type="checkbox" id="checkbox-permission" class="checkbox">
+          <label for="checkbox-permission">I Agree To The Terms & Conditions</label>
+        </p>
+        <p class="attension-message"></p>
+        <div class="btn">
+          <!-- <button class="button-bk" id="signup-btn">Sign Up</button> -->
+          <input class="button-bk" id="signup-btn" type="submit">
+        </div>
+        <p id="redirect-login">Don't have an Account? <a href="../html file/login.html">Login Now!</a></p>
+      </form> <!---form div-->
+    </div> <!---main div-->
+  </div> <!---container div-->
+  <script type="module" src="../js file/register.js"></script>
+  <script type="module" src="../script.js"></script>
+</body>
+
+</html>
