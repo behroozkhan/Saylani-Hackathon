@@ -30,7 +30,7 @@ const loginPage = () => {
       // Signed in 
       const user = userCredential.user;
       console.log("user succefully login==>", user);
-      window.location.href = "../index.html"
+      window.location.href = "../html file/home.html"
       // ...
     })
     .catch((error) => {
