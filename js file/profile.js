@@ -89,6 +89,7 @@ let updateprofile = async () => {
       // Update Firestore document with image URL
       await updateDoc(userRef, {
         profileImageUrl: imageUrl,
+        // name,
       });
   
       const storageRef = ref(storage, uid);

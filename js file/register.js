@@ -54,8 +54,9 @@ signupForm.addEventListener("submit", async (e) => {
     console.log("hackathonRef", hackthonRef);
     await setDoc(hackthonRef, userInfo);
 
-    window.location.href = "../index.html";
     console.log("user Sign Up");
+    window.location.href = "../html file/home.html";
+
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;

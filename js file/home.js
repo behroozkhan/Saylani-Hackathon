@@ -1,13 +1,15 @@
-//==================   FireBase Initializing ==================================//
+// //==================   FireBase Initializing ==================================//
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import {
     getAuth,
+    onAuthStateChanged, 
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import {
     getFirestore, collection,
-    query,
-    addDoc, doc, getDoc, getDocs,
+    query, where,
+    addDoc, doc, getDoc, getDocs, setDoc
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 
@@ -26,30 +28,53 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let postContainer = document.querySelectorAll(".container-body")[0];
+
 let postForm = document.querySelectorAll("#post_form")[0];
 
 
 
-//==================== publis data into this function =================================//
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const uid = user.uid;
+        console.log('User uid-->', uid)
+        // location.href = "../index.html"
+        // loader_container.style.display = 'none'
+        // createAccountContainer.style.display = 'none'
+        // content_container.style.display = 'block'
+        getPosts()
+        // const info = await getUserInfo(uid)
+        // welcome.innerHTML = `Welcome ${info.name}`
+        // ...
+    } else {
+        console.log('User is not logged in')
+        // loader_container.style.display = 'none'
+        // createAccountContainer.style.display = 'block'
+        // content_container.style.display = 'none'
+
+    }
+});
+
 postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     let postTitle = document.querySelectorAll("#post_title")[0].value;
     let postDescription = document.querySelectorAll("#post_desc")[0].value;
+
     try {
         const userInfo = await getUserInfo(auth.currentUser.uid);
+        
         if (userInfo) {
             const postObj = {
                 postTitle,
                 postDescription,
                 userUid: auth.currentUser.uid,
                 userName: userInfo.name,
+                userImg:userInfo.profileImageUrl,
                 created_at: new Date().getTime().toString()
             }
 
             const postRef = collection(db, 'hackathon');
             await addDoc(postRef, postObj);
             
-            // getPosts();
         } else {
             console.log("No user info found");
         }
@@ -57,10 +82,9 @@ postForm.addEventListener('submit', async (e) => {
         console.error("Error getting user info:", error);
     }
     getPosts();
-
+    postForm.reset();
 });
 
-//================ GetUser Info In This Functin ============================//
 let  getUserInfo = async(uid)=> {
     const userRef = doc(db, "hackathon", uid)
     const docSnap = await getDoc(userRef);
@@ -70,23 +94,27 @@ let  getUserInfo = async(uid)=> {
         info = docSnap.data(
         )
     } else {
+        // docSnap.data() will be undefined in this case
         console.log("No such document!");
     }
+
     return info
 }
-//============ this function calling post into firebase and render Dom ===============//
+
 let getPosts = async () => {
-    const q = query(collection(db, "hackathon"));
+    const q = query(collection(db, "hackathon"), where("userUid", "==", auth.currentUser.uid));
 
     const querySnapshot = await getDocs(q);
+
     querySnapshot.forEach((doc) => {
         const postInfo = doc.data();
-        const { postTitle, created_at, userName, postDescription } = postInfo;
-
-        const card = `
+        console.log("postInfo==>\\",postInfo);
+        const { postTitle, created_at, userName, postDescription,userImg } = postInfo;
+        
+            const card = `
             <div class="card">
             <div class="card-under">
-            <img id='user-img'  src="${localStorage.getItem('profileImageUrl')}" alt="User Profile">
+            <img id='user-img'  src="${userImg}" alt="User Profile">
             <div class="card-title">
                 ${postTitle}:
             </div>
@@ -100,11 +128,12 @@ let getPosts = async () => {
                 <button class='button-bk '  id="edit-post">Edit</button>
                 <button class='button-bk ' id="delete-post">Delete</button>
                 </div>
-            </div>
+            </div>  
         `;
+
         postContainer.innerHTML += card;
     });
+    // postContainer.innerHTML = "";
+
    
 };
-
-

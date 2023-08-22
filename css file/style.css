@@ -134,6 +134,7 @@ nav ul li{
     width: 100%;
     display: flex;
     justify-content: center;
+    height: auto;
     /* margin-left: 2em; */
     align-items: center;
     padding: 1em;
