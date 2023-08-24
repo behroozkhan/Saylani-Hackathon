@@ -54,7 +54,7 @@ onAuthStateChanged(auth, (user) => {
     console.log("uid==>", uid);
     console.log("location==>", location.href);
     getUserCurrentData(uid, user.email);
-    document.getElementById("email").innerHTML = user.email;
+    document.getElementById("email").value = user.email;
     // ...
   } else {
     console.log("user sign out");
@@ -70,8 +70,8 @@ const getUserCurrentData = async (uid, email) => {
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     console.log(doc.id, " => ", doc.data());
-    document.getElementById("name").innerHTML = doc.data().name;
-    document.getElementById("userName").innerHTML = doc.data().userName;
+    document.getElementById("name").value = doc.data().name;
+    document.getElementById("userName").value = doc.data().userName;
   });
 };
 
