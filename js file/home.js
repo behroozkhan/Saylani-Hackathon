@@ -4,7 +4,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import {
     getAuth,
-    onAuthStateChanged, 
+    onAuthStateChanged,signOut
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import {
     getFirestore, collection,
@@ -31,8 +31,7 @@ let postContainer = document.querySelectorAll(".blogs-container")[0];
 
 let postForm = document.querySelectorAll("#post_form")[0];
 let renderUserProfile = document.querySelectorAll("#render-image")[0];
-let signOut = document.querySelectorAll("#sign-Out")[0];
-
+const logOutUser = document.querySelectorAll("#log-Out")[0];
 
 let loader = document.querySelectorAll("#loader")[0]; 
 
@@ -167,18 +166,15 @@ let  getUserInfo = async(uid)=> {
 }
 
 
-const logoutBtn = document.querySelectorAll("#log-Out")[0];
-logoutBtn.addEventListener("click", () => {
-  signOut(auth)
+const logOut = ()=>{
+    signOut(auth)
     .then(() => {
       location.href = "../index.html";
     })
     .catch((error) => {
       console.log("Error while signing out:", error);
     });
-})
-
-
-
+}
+logOutUser.addEventListener("click",logOut)
 
 window.deletePost = deletePost;
