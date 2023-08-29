@@ -1,20 +1,20 @@
 
- import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+import {
+   getAuth,
+   createUserWithEmailAndPassword,onAuthStateChanged
+ } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
  import {
-    getAuth,
-    createUserWithEmailAndPassword,onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-  import {
-      getFirestore,doc,setDoc,collection,addDoc,updateDoc
-  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+     getFirestore,doc,setDoc,collection,addDoc,updateDoc
+ } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 const firebaseConfig = {
-    apiKey: "AIzaSyDKckeGedMbGSj7NpxFk3siDAXkzd-yGU0",
-    authDomain: "friend-hackthon.firebaseapp.com",
-    projectId: "friend-hackthon",
-    storageBucket: "friend-hackthon.appspot.com",
-    messagingSenderId: "229955689782",
-    appId: "1:229955689782:web:29c41164559f544a626797",
-    measurementId: "G-ZST5B4N4VQ"
+   apiKey: "AIzaSyDKckeGedMbGSj7NpxFk3siDAXkzd-yGU0",
+   authDomain: "friend-hackthon.firebaseapp.com",
+   projectId: "friend-hackthon",
+   storageBucket: "friend-hackthon.appspot.com",
+   messagingSenderId: "229955689782",
+   appId: "1:229955689782:web:29c41164559f544a626797",
+   measurementId: "G-ZST5B4N4VQ"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -24,28 +24,28 @@ const db = getFirestore(app);
 let regFlag = false;
 
 onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    if(location.pathname !== "../html file/home.html" && regFlag){
+ if (user) {
+   // if(location.pathname !== "../html file/home.html" && regFlag){
 
-    }
-      const uid = user.uid;
-      console.log('User uid-->', uid)
-      location.href = '../html file/home.html'
-      // location.href = "../index.html"
-      // loader_container.style.display = 'none'
-      // createAccountContainer.style.display = 'none'
-      // content_container.style.display = 'block'
-      // getPosts()
-      // const info = await getUserInfo(uid)
-      // welcome.innerHTML = `Welcome ${info.name}`
-      // ...
-  } else {
-      console.log('User is not logged in')
-      // loader_container.style.display = 'none'
-      // createAccountContainer.style.display = 'block'
-      // content_container.style.display = 'none'
+   // }
+     const uid = user.uid;
+     console.log('User uid-->', uid)
+     // location.href = '../html file/home.html'
+     // location.href = "../index.html"
+     // loader_container.style.display = 'none'
+     // createAccountContainer.style.display = 'none'
+     // content_container.style.display = 'block'
+     // getPosts()
+     // const info = await getUserInfo(uid)
+     // welcome.innerHTML = `Welcome ${info.name}`
+     // ...
+ } else {
+     console.log('User is not logged in')
+     // loader_container.style.display = 'none'
+     // createAccountContainer.style.display = 'block'
+     // content_container.style.display = 'none'
 
-  }
+ }
 });
 
 
@@ -61,44 +61,54 @@ let loader = document.querySelectorAll("#loader")[0];
 
 
 signupForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  loader.style.display = 'block';
-  let name = nameInp.value.toLowerCase();
-  let userName = userInp.value.toLowerCase();
-  let email = emailInp.value.toLowerCase();
-  let password = passInp.value;
-  let confirmPs = cPassInp.value;
-  // regFalg = false;
-if (!regFlag) {
-        // Only proceed if regFlag is false (user has not registered before)
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
+ e.preventDefault();
+ loader.style.display = 'block';
+ let name = nameInp.value.toLowerCase();
+ let userName = userInp.value.toLowerCase();
+ let email = emailInp.value.toLowerCase();
+ let password = passInp.value;
+ let confirmPs = cPassInp.value;
+ // regFalg = false;
+       // Only proceed if regFlag is false (user has not registered before)
+       try {
+           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+           const user = userCredential.user;
 
-            const userInfo = {
-                name,
-                userName,
-                email,
-                uid: user.uid,
-            };
+           const userInfo = {
+               name,
+               userName,
+               email,
+               uid: user.uid,
+           };
 
-            const hackathonRef = doc(db, "hackathon", user.uid);
-            await setDoc(hackathonRef, userInfo);
+           const hackathonRef = doc(db, "hackathon", user.uid);
+           await setDoc(hackathonRef, userInfo);
 
-            regFlag = true; // Set regFlag to true
-            loader.style.display = 'none';
-            window.location.href = '../html file/home.html';
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log("error", error);
-        }
-    }
+           // regFlag = true;
+           loader.style.display = 'none';
+           Swal.fire({
+             icon: "success",
+             title: "User updated successfully",
+           });
+           window.location.href = '../html file/home.html';
+       } catch (error) {
+        
+         console.log("error", error);
+           const errorCode = error.code;
+           const errorMessage = error.message;
+           Swal.fire({
+             icon: "error",
+             title: "Oops...",
+             text: errorMessage,
+             footer: '<a href="">Why do I have this issue?</a>',
+           });
+           console.log("error", error);
+       }
 
-  // Clear input fields after signup
-  nameInp.value = "";
-  userInp.value = "";
-  emailInp.value = "";
-  passInp.value = "";
-  cPassInp.value = "";
+ // Clear input fields after signup
+ nameInp.value = "";
+ userInp.value = "";
+ emailInp.value = "";
+ passInp.value = "";
+ cPassInp.value = "";
 });

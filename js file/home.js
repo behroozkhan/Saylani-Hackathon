@@ -9,7 +9,7 @@ import {
 import {
     getFirestore, collection,
     query, where,
-    addDoc, doc, getDoc, getDocs, setDoc
+    addDoc, doc, getDoc, getDocs
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 
@@ -27,35 +27,33 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let postContainer = document.querySelectorAll(".container-body")[0];
+let postContainer = document.querySelectorAll(".blogs-container")[0];
 
 let postForm = document.querySelectorAll("#post_form")[0];
+let renderUserProfile = document.querySelectorAll("#render-image")[0];
+let signOut = document.querySelectorAll("#sign-Out")[0];
 
 
+let loader = document.querySelectorAll("#loader")[0]; 
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const uid = user.uid;
         console.log('User uid-->', uid)
-        // location.href = "../index.html"
-        // loader_container.style.display = 'none'
-        // createAccountContainer.style.display = 'none'
-        // content_container.style.display = 'block'
+       
         getPosts()
-        // const info = await getUserInfo(uid)
-        // welcome.innerHTML = `Welcome ${info.name}`
-        // ...
+    
     } else {
         console.log('User is not logged in')
-        // loader_container.style.display = 'none'
-        // createAccountContainer.style.display = 'block'
-        // content_container.style.display = 'none'
+
 
     }
 });
 
 postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    loader.style.display = 'block';
+
     let postTitle = document.querySelectorAll("#post_title")[0].value;
     let postDescription = document.querySelectorAll("#post_desc")[0].value;
 
@@ -68,22 +66,89 @@ postForm.addEventListener('submit', async (e) => {
                 postDescription,
                 userUid: auth.currentUser.uid,
                 userName: userInfo.name,
-                userImg:userInfo.profileImageUrl,
+                userImg:userInfo.userProfileImgUrl,
                 created_at: new Date().getTime().toString()
             }
-
-            const postRef = collection(db, 'hackathon');
+            console.log("userInfo70",userInfo);
+            const postRef = collection(db, 'bk_blogs');
             await addDoc(postRef, postObj);
-            
+            loader.style.display = 'none';
+            console.log("postRef",postRef);
+            Swal.fire({
+                icon: "success",
+                title: "Post Publish Succesfully",
+              });
         } else {
             console.log("No user info found");
         }
+        
     } catch (error) {
-        console.error("Error getting user info:", error);
+        console.log("Error getting user info:", error);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error,
+            footer: '<a href="">Why do I have this issue?</a>',
+          });
     }
+    postTitle = "";
+    postDescription = "";
+
     getPosts();
-    postForm.reset();
 });
+let getPosts = async () => {
+    postContainer.innerHTML = ""; 
+    loader.style.display = 'block';
+
+    const q = query((collection(db, "bk_blogs")), where("userUid", "==", auth.currentUser.uid));
+
+    const querySnapshot = await getDocs(q);
+    postContainer.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+        const postInfo = doc.data();
+        renderUserProfile.src =  doc.data().userImg;
+        const { postTitle, created_at, userName, postDescription,userImg } = postInfo;
+        console.log("userImg109",userImg);
+        const card = `
+        <div class="card">
+        <div class="img-name">
+          <img id="user-img"  src="${userImg ? userImg : '../images/user-defoult.png'}" alt="">
+        <div class="name-date-container">
+            <h3>${userName || 'Unknown User'}</h3>
+            <span>${created_at ? new Date(Number(created_at)).toLocaleDateString() : ''}</span>
+        </div>
+        </div>
+
+        <div class="title-desc-container">
+            <h2>${postTitle || ''}</h2>
+            <p>${postDescription  || ''}</p>
+        </div>
+        
+   
+            <div class="btn">
+                <button class='button-bk '  id="edit-post" onclick="editPost()">Edit</button>
+                <button class='button-bk ' id="delete-post" onclick="deletePost()">Delete</button>
+            </div>
+        </div>  
+        </div>
+    `;
+
+        postContainer.innerHTML += card;
+        
+
+    });
+    loader.style.display = 'none';
+};
+
+const deletePost = () =>{
+        console.log("hey i Am Delete baby");
+}
+
+
+
+
+
+
 
 let  getUserInfo = async(uid)=> {
     const userRef = doc(db, "hackathon", uid)
@@ -91,49 +156,29 @@ let  getUserInfo = async(uid)=> {
     let info = null
     if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
+        console.log("renderUserProfile",renderUserProfile);
         info = docSnap.data(
         )
     } else {
-        // docSnap.data() will be undefined in this case
         console.log("No such document!");
     }
 
     return info
 }
 
-let getPosts = async () => {
-    const q = query(collection(db, "hackathon"), where("userUid", "==", auth.currentUser.uid));
 
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-        const postInfo = doc.data();
-        console.log("postInfo==>\\",postInfo);
-        const { postTitle, created_at, userName, postDescription,userImg } = postInfo;
-        
-            const card = `
-            <div class="card">
-            <div class="card-under">
-            <img id='user-img'  src="${userImg}" alt="User Profile">
-            <div class="card-title">
-                ${postTitle}:
-            </div>
-                <div class="card-title card-userInfo">  
-                    <span id='post-userName'> (${userName} </span> 
-                    <span id='post-date'> ${new Date(Number(created_at)).toLocaleDateString()} ) </span> 
-                </div>
-                </div>
-                <div class="card-body-desc">${postDescription}</div>
-                <div class="btn">
-                <button class='button-bk '  id="edit-post">Edit</button>
-                <button class='button-bk ' id="delete-post">Delete</button>
-                </div>
-            </div>  
-        `;
-
-        postContainer.innerHTML += card;
+const logoutBtn = document.querySelectorAll("#log-Out")[0];
+logoutBtn.addEventListener("click", () => {
+  signOut(auth)
+    .then(() => {
+      location.href = "../index.html";
+    })
+    .catch((error) => {
+      console.log("Error while signing out:", error);
     });
-    // postContainer.innerHTML = "";
+})
 
-   
-};
+
+
+
+window.deletePost = deletePost;

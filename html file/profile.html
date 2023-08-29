@@ -5,52 +5,119 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile</title>
+  <link rel="icon" href="../images/bolt.png" type="image/png">
+
   <link rel="stylesheet" href="../css file/profile.css">
 </head>
 
 <body>
-
+<!-- header navbar code -->
  <div class="head-middle-container"> <!-- Added head-middle-center class -->
   <div class="middle-container">
       <a href="../index.html"><img id="main-logo" src="../images/bolt.png" alt="logo"></a>
-      <h3>Heckhaton</h3>
+      <h3 id="post-inst">Post Instint</h3>
   </div>
-
+  <div class="heading-name">
+    <h1>User Profile!</h1>
+  </div>
   <div class="logout-container">
           <button id="logout-btn">Logout</button>
- 
+          <!-- <button id="dashboard-btn">DashBoard</button> -->
+          <a  id="dashboard-btn" href="../html file/home.html">DashBoard</a>
   </div>
 </div>
-
-<main class="container">
-  <div class="card">
-    <img id="user-profile" src="" alt="User image" class="card__image" />
-    <label class="camera-icon" for="file-input">
-      <img  src="../images/camera.svg" alt="camera icon">
-  </label>
-  <input type="file" style="display: none;" id="file-input">
-    <div class="card__text">
-
-      <h2 id="name"></h2>
-      <h2 id="userName"></h2>
-      <h3 id="email"></h3>
-      <!-- <div class="inputs">
-        <br>
-        <input type="text" id="name">
-        <br><br>
-        <input type="text" id="userName">
-        <br>
-        <input type="email" id="email">
-      </div> -->
+<!-- card shape input container -->
+<div class="container">
+  <div class="main">
+    <div class="user-img">
+      <!-- <img id="user-profile" src="../images/user-icon.png" alt="User image" class="card__image" /> -->
+      <img id="user-profile"  src="../images/user-defoult.png" alt="User Profile" alt="user-male-circle"/>
+      <label class="camera-icon" for="file-input" width="20" height="20">
+        <!-- <img id="camera-img"  src="../images/camera.svg" alt="camera icon"> -->
+        <img id="camera-img" width="20" height="20" src="https://img.icons8.com/fluency-systems-filled/48/camera.png" alt="camera"/>
+       
+    </label>
+    <input type="file" style="display: none;" id="file-input">
     </div>
-     <br><br>
-    <div class="card__action">
-      <button class="card__action__button card__action--follow" id="update-profile">Update Profile</button>
-    </div>
+
+    <div class="form">
+      <div class="form-input">
+        <div id="edit-save-container">
+        <input type="text" id="name" placeholder="Full Name" required="">
+        <img width="15" height="15" id="save-feild"   src="../images/save-icon.png"/>
+        <img id="edit-feild"  src="../images/edit-icon.svg" alt="edit"/>
+
+      </div>
+      </div>
+      <div class="form-input">
+        <input type="text" id="username" placeholder="Username" required="">
+      </div>
+      <div class="form-input">
+        <input type="email" id="email" placeholder="Email" required="" disabled style="color: rgb(225, 150, 150);">
+      </div>
+      
+      <div class="form-input old-pass-sty">
+       
+       
+        <div id="edit-save-container-pass">
+          <img width="15" height="15" id="save-feild-pass"   src="../images/save-icon.png"/>
+          <img id="edit-feild-pass"  src="../images/edit-icon.svg" alt="edit"/>
+        </div>
+
+
+
+        <input type="password" disabled  class="old-password-box" id="old-password" placeholder="old Password" required="">
+      </div>
+      <div class="form-input">
+        <input type="password" disabled  id="new-password" placeholder="New Password" required="">
+      </div>
+      <div class="form-input">
+        <input type="password"  disabled id="confirm-password" placeholder="Confirm Password" required="">
+      </div>
+      <!-- <p class="attension-message"></p> -->
+      <div class="btn">
+       
+        <button class="button-bk update-profile" id="signup-btn">Update Feild</button>
+      </div>
+    </div> <!---form div-->
+  </div> <!---main div-->
+</div> <!---container div-->
+
+ <!-- loader -->
+ <main id="loader">
+  <div class="loader-title">
+    Please Wait Loading...
   </div>
+  <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#5ebd3e" />
+        <stop offset="33%" stop-color="#ffb900" />
+        <stop offset="67%" stop-color="#f78200" />
+        <stop offset="100%" stop-color="#e23838" />
+      </linearGradient>
+      <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%" stop-color="#e23838" />
+        <stop offset="33%" stop-color="#973999" />
+        <stop offset="67%" stop-color="#009cdf" />
+        <stop offset="100%" stop-color="#5ebd3e" />
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke-linecap="round" stroke-width="16">
+      <g class="ip__track" stroke="#ddd">
+        <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+        <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+      </g>
+      <g stroke-dasharray="180 656">
+        <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+        <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+      </g>
+    </g>
+  </svg>
 </main>
-  
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="module" src="../js file/profile.js"></script>
 </body>
 
