@@ -21,8 +21,10 @@
 }
 
 body {
-  background: #B0E2FF;
+  /* background: #B0E2FF; */
   width: 100%;
+  background: linear-gradient(to right,#00aec7, #5ee2fe, #68d3fe);
+  /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
 
 }
 
@@ -118,6 +120,7 @@ nav ul li {
   align-items: center;
   flex-direction: column;
   padding: 2em;
+  
 
 }
 
@@ -411,8 +414,9 @@ nav ul li {
   display: none;
   height: 100vh;
   margin-left: 30em;
-  z-index: -1;
+  z-index: 1;
   position: fixed;
+  align-items: center;
 
 }
 
@@ -509,7 +513,7 @@ nav ul li {
 }
 
 #post-form-modal {
-  background-color: #ccc;
+  background-color: #e6e7e7;
   width: 600px;
   height: 330px;
   padding: 15px;
@@ -531,6 +535,7 @@ nav ul li {
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: aleo;
+  color: #141414;
 }
 
 .input-des .btn-primary-modal {

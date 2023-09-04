@@ -25,29 +25,50 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// -------------------------------- Getting HTML Elements -------------------------------------------------------//
 let postContainer = document.querySelectorAll(".blogs-container")[0];
 let postForm = document.querySelectorAll("#post_form")[0];
 let renderUserProfile = document.querySelectorAll("#render-image")[0];
 const logOutUser = document.querySelectorAll("#log-Out")[0];
 let loader = document.querySelectorAll("#loader")[0];
 let editModal = document.querySelectorAll("#post-form-modal")[0];
-let closeModal = document.querySelectorAll(".close-modal")[0];
 let updatedDesc = document.querySelectorAll("#edit_desc")[0];
 let upadtedTitle = document.querySelectorAll("#edit-title")[0];
 let cancelEdit = document.querySelectorAll("#cancel-post")[0];
 let UpdateBlogPost = document.querySelectorAll("#update-post")[0];
 let updateEditId = "";
 
+// -------------------------------- User State Check-------------------------------------------------------//
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const uid = user.uid;
         console.log('User uid-->', uid)
-        getPosts()
+        getPosts();
+        getUserInfo();
     } else {
         console.log('User is not logged in')
     }
 });
+// -------------------------------- Current User Information -------------------------------------------------------//
+
+let getUserInfo = async (uid) => {
+    const userRef = doc(db, "hackathon", auth.currentUser.uid)
+    const docSnap = await getDoc(userRef);
+    let info = null
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        if(docSnap.data().userProfileImgUrl)
+        renderUserProfile.src = docSnap.data().userProfileImgUrl;
+        info = docSnap.data(
+        )
+    } else {
+        console.log("No such document!");
+    }
+    return info
+}
+
+// -------------------------------- User Will Publish Post Using This Logic -------------------------------------------------------//
 
 postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -58,6 +79,7 @@ postForm.addEventListener('submit', async (e) => {
 
     try {
         const userInfo = await getUserInfo(auth.currentUser.uid);
+        console.log("userInfo==>",userInfo);
         const postObj = {
             postTitle,
             postDescription,
@@ -66,7 +88,7 @@ postForm.addEventListener('submit', async (e) => {
             userImg: userInfo ? userInfo.userProfileImgUrl : '../images/user-default.png',
             created_at: new Date().getTime().toString(),
         }
-        console.log("userInfo70", userInfo);
+        console.log("postObj==>",postObj);
         const postRef = collection(db, 'bk_blogs');
         await addDoc(postRef, postObj);
         loader.style.display = 'none';
@@ -90,6 +112,7 @@ postForm.addEventListener('submit', async (e) => {
 
 });
 
+// -------------------------------- Get All User Blogs -------------------------------------------------------//
 
 let getPosts = async () => {
     try {
@@ -99,7 +122,6 @@ let getPosts = async () => {
         postContainer.innerHTML = '';
         querySnapshot.forEach((doc) => {
             const postInfo = doc.data();
-            renderUserProfile.src = doc.data().userImg;
             const { postTitle, created_at, userName, postDescription, userImg } = postInfo;
             const card = `
          <div class="card">
@@ -117,11 +139,8 @@ let getPosts = async () => {
              <div class="btn">
          <button class='button-bk'  id="edit-post" onclick="editPost('${doc.id}')">Edit</button>
          <button class='button-bk ' id="delete-post" onclick="deletePost('${doc.id}')">Delete</button>
-
          <div class="anchor-param"><a class="user-param" href="../html file/usercomplete.html?user=${doc.data().userUid}">See All From This User...</a>
          </div>
-         
-
              </div>
          </div>  
          </div>
@@ -139,7 +158,7 @@ let getPosts = async () => {
     loader.style.display = 'none';
 };
 
-// Edit Post User Select The Edit Button Modal Will Be Open And User Edit Thier Uploaded Post
+//-----   Edit Post User Select The Edit Button Modal Will Be Open And User Edit Thier Uploaded Post   ---------//
 const editPost = (id) => {
     try {
         updateEditId = id;
@@ -152,7 +171,8 @@ const editPost = (id) => {
                 upadtedTitle.value = postTitle;
                 updatedDesc.value = postDescription;
             }
-
+            upadtedTitle.value = '';
+            updatedDesc.value  = ' ';
             editModal.style.display = 'block';
         });
 
@@ -166,9 +186,8 @@ const editPost = (id) => {
         });
     }
 };
-
+// -----------------------   Modal Will Display And User Change His Publish Post   ----------------------//
 const upadetPost = async () => {
-
     try {
         console.log(upadtedTitle.value, updatedDesc.value, updateEditId);
         const editBlogPostRef = doc(db, 'bk_blogs', updateEditId);
@@ -198,7 +217,7 @@ cancelEdit.addEventListener('click', () => {
     editModal.style.display = 'none';
 })
 
-// Delete Logic Here This Publish Data Will Be deleted into the firebase
+//------------------ Delete Logic Here This Publish Data Will Be deleted into the firebase -------------------//
 const deletePost = async (id) => {
     try {
         loader.style.display = 'block';
@@ -221,21 +240,8 @@ const deletePost = async (id) => {
 
 }
 
-let getUserInfo = async (uid) => {
-    const userRef = doc(db, "hackathon", uid)
-    const docSnap = await getDoc(userRef);
-    let info = null
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        console.log("renderUserProfile", renderUserProfile);
-        info = docSnap.data(
-        )
-    } else {
-        console.log("No such document!");
-    }
-    return info
-}
 
+//---------------------------  User State Logout   -------------------------------------------------------//
 const logOut = () => {
     signOut(auth)
         .then(() => {
@@ -247,7 +253,7 @@ const logOut = () => {
 }
 logOutUser.addEventListener("click", logOut)
 
-
+// -------------------------------  Event Trigger ------------------------------------------------//
 window.deletePost = deletePost;
 window.editPost = editPost;
 UpdateBlogPost.addEventListener('click', upadetPost)

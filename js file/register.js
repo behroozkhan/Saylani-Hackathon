@@ -5,7 +5,7 @@ import {
    createUserWithEmailAndPassword,onAuthStateChanged
  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
  import {
-     getFirestore,doc,setDoc,collection,addDoc,updateDoc
+     getFirestore,doc,setDoc,
  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 const firebaseConfig = {
    apiKey: "AIzaSyDKckeGedMbGSj7NpxFk3siDAXkzd-yGU0",
@@ -34,6 +34,7 @@ onAuthStateChanged(auth, async (user) => {
 
 
 
+// -------------------    Geeting Html Elemnts -----------------------------------------------------------------//
 
 let nameInp = document.querySelectorAll("#name")[0];
 let userInp = document.querySelectorAll("#username")[0];
@@ -43,7 +44,7 @@ let cPassInp = document.querySelectorAll("#c-password")[0];
 let signupForm = document.querySelectorAll("#signup-form")[0]; 
 let loader = document.querySelectorAll("#loader")[0]; 
 
-
+// ---------------------------   Register User -----------------------------------------------//
 signupForm.addEventListener("submit", async (e) => {
  e.preventDefault();
  loader.style.display = 'block';

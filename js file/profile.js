@@ -10,14 +10,14 @@ import {
   query,
   where,
   getDocs,
-  doc, getDoc,
+  doc,
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
-  getDownloadURL, deleteObject
+  getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -36,6 +36,7 @@ const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage(app);
 
+// -------------------    Geeting Html Elemnts -----------------------------------------------------------------//
 const fileInput = document.querySelectorAll("#file-input")[0];
 const userProfile = document.querySelectorAll("#user-profile")[0];
 const updateProfileBtn = document.querySelectorAll(".update-profile")[0];
@@ -54,7 +55,7 @@ const editPassFeild = document.querySelectorAll("#edit-feild-pass")[0];
 const oldPassBox = document.querySelectorAll(".old-pass-sty")[0];
 
 
-
+// -----------------     User State Check   -------------------------------------------------------------------//
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
@@ -62,14 +63,10 @@ onAuthStateChanged(auth, (user) => {
     getUserInfo()
   } else {
     console.log("user sign out");
-
   }
 });
-
-
 /// -------------------geeting User data into FireStore FireBase ----------------------------///
 let getUserInfo = async (uid) => {
-
   loader.style.display = 'block';
   const q = query((collection(db, "hackathon"))
   , where("uid", "==", auth.currentUser.uid));
@@ -83,51 +80,41 @@ let getUserInfo = async (uid) => {
       userProfile.src = doc.data().userProfileImgUrl;
       console.log("userprofile",userProfile);
     }
-
     console.log(" doc.data()==>8888", doc.data());
   });
-
   loader.style.display = 'none';
   cameraImg.style.backgroundColor = '#f1ecec'
 
 }
-
 // ---------   This Function Change the user image and convert into a url ------------------------//
 fileInput.addEventListener('change', (e) => {
   userProfile.src = URL.createObjectURL(e.target.files[0]);
   cameraImg.style.backgroundColor = '#f1ecec'
 })
-
 const editUserFeild = async () => {
   name.value = "";
   userName.value = "";
   editInfo.style.display = 'none';
   saveInfo.style.display = "block";
-
 }
+//------------------------   Intiliazing State User Updated Value -----------------------------------//
 const saveUserInfo = async () => {
   const updatedName = name.value;
   const updatedUserName = userName.value;
   if (updatedName && updatedUserName) {
     loader.style.display = 'block';
-
     const uid = auth.currentUser.uid;
     const userFeildChangeRef = doc(db, 'hackathon', uid);
-
     await updateDoc(userFeildChangeRef, {
       name: updatedName,
       userName: updatedUserName,
     });
-
     loader.style.display = 'none';
-
     Swal.fire('Profile Updated!', 'Name And UserName Updated! 😊', 'success');
-
     // Hide the "Save" button and show the edit icon
     saveInfo.disabled = true;
     editInfo.style.display = 'none';
     saveInfo.style.display = "block";
-
   } else {
     Swal.fire('Error', 'Name and username cannot be empty!', 'error');
   }
@@ -136,7 +123,7 @@ const saveUserInfo = async () => {
 editInfo.addEventListener('click', editUserFeild)
 saveInfo.addEventListener("click", saveUserInfo)
 
-
+//----------------------    Update User Image And Password reference ---------------------------------//
 const updateProfile = async () => {
   loader.style.display = 'block';
   if (oldPassword.value && newPassword.value) {
@@ -166,7 +153,6 @@ const updateProfile = async () => {
 // ------------------- This Function Work Is edit feild for Password  ----------------------------//
 const editPassWord = (oldPass, newPass,confirmPas) => {
   loader.style.display = 'block';
-  // Enable the input fields for editing
   oldPassword.disabled = false;
   newPassword.disabled = false;
   confirmPassword.disabled = false;
@@ -222,15 +208,8 @@ const savePassword = async () => {
   }
 };
 
-
-editPassFeild.addEventListener('click', editPassWord)
-savePassFeild.addEventListener('click', savePassword)
-
-
 // ------------- This Function Work Only Uploading A File Object img,video,pdf etc...   -----------------//
 const uploadFile = (file) => {
-  loader.style.display = 'block';
-
   return new Promise((resolve, reject) => {
     const userProfileRef = ref(storage, `images/${file.name}`);
     console.log("userProfileRef", userProfileRef);
@@ -249,7 +228,6 @@ const uploadFile = (file) => {
             console.log("Upload is running");
             break;
         }
-
       },
       (error) => {
         Swal.fire({
@@ -268,14 +246,9 @@ const uploadFile = (file) => {
       }
     );
   });
-  loader.style.display = 'none';
-
 };
 
-
-updateProfileBtn.addEventListener("click", updateProfile);
-
-
+//---------------------------  User State Logout   -------------------------------------------------------//
 const logoutBtn = document.querySelectorAll("#logout-btn")[0];
 logoutBtn.addEventListener("click", () => {
   signOut(auth)
@@ -286,3 +259,8 @@ logoutBtn.addEventListener("click", () => {
       console.log("Error while signing out:", error);
     });
 });
+
+
+editPassFeild.addEventListener('click', editPassWord)
+savePassFeild.addEventListener('click', savePassword)
+updateProfileBtn.addEventListener("click", updateProfile);

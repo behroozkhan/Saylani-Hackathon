@@ -16,8 +16,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+// -------------------    Geeting Html Elemnts -----------------------------------------------------------------//
+let userInpLogin = document.querySelectorAll("#username-login")[0];
+let passInpLogin = document.querySelectorAll("#password-login")[0];
+let loginBtn = document.querySelectorAll("#login-btn")[0];
 
-
+// -----------------     User State Check   -------------------------------------------------------------------//
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
@@ -28,22 +32,31 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-let userInpLogin = document.querySelectorAll("#username-login")[0];
-let passInpLogin = document.querySelectorAll("#password-login")[0];
-let loginBtn = document.querySelectorAll("#login-btn")[0];
 
+//-------------------------  Register User Login   -------------------------------------------------//
 const loginPage = () => {
   let email = userInpLogin.value.toLowerCase();
   let password = passInpLogin.value;
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      Swal.fire(
+        'Login!',
+        'user succefully login!😊',
+        'success'
+      )
       console.log("user succefully login==>", user);
       window.location.href = "../html file/home.html"
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: reject.error,
+        footer: '<a href="">Why do I have this issue?</a>',
+      });
       console.log("errorMessage==>",errorMessage);
     });
 

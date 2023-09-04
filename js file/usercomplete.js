@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebas
 import {
   getAuth,
   onAuthStateChanged,
-  signOut, EmailAuthProvider, reauthenticateWithCredential, updatePassword,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import {
   getFirestore,
@@ -10,15 +10,8 @@ import {
   query,
   where,
   getDocs,
-  doc, getDoc,
-  updateDoc,
+  
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL, deleteObject
-} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDKckeGedMbGSj7NpxFk3siDAXkzd-yGU0",
@@ -35,15 +28,19 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+
+
+// -------------------    Geeting Html Elemnts -----------------------------------------------------------------//
 const allBlogsContainer = document.querySelectorAll(".post-container")[0];
 const renderImg = document.querySelectorAll("#render-img")[0];
 const userProfileRendering = document.querySelectorAll("#user-img-profile")[0];
 const name = document.querySelectorAll("#user-profile-name")[0];
 const email = document.querySelectorAll("#user-profile-email")[0];
 let loader = document.querySelectorAll("#loader")[0];
+const logOutUser = document.querySelectorAll("#logout")[0];
 
 
-
+// -----------------     User State Check   -------------------------------------------------------------------//
 onAuthStateChanged(auth,(user)=>{
     if(user){
         const uid = user.uid;
@@ -52,11 +49,8 @@ onAuthStateChanged(auth,(user)=>{
     }
 })
 
-
-
-
+// -------------------------------- Get All User Blogs -------------------------------------------------------//
 const getUserAllBlogs = async() => {
-    
     try {
         const urlParams = new URLSearchParams(location.search);
         const userParam = urlParams.get('user');
@@ -99,7 +93,7 @@ const getUserAllBlogs = async() => {
        loader.style.display = 'none';
 }
 
-
+// ---------------------------   Current User Information   ----------------------------------------------//
 let getUserInfo = async (uid) => {
     try {
         
@@ -124,4 +118,14 @@ let getUserInfo = async (uid) => {
     loader.style.display = 'none';
   
   }
-  
+//---------------------------  User State Logout   -------------------------------------------------------//
+  const logOut = () => {
+    signOut(auth)
+        .then(() => {
+            location.href = "../index.html";
+        })
+        .catch((error) => {
+            console.log("Error while signing out:", error);
+        });
+}
+logOutUser.addEventListener("click", logOut)

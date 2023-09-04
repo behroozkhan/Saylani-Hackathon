@@ -26,8 +26,8 @@
   body {
 
     height: 100vh;
-    background: #B0E2FF;
-  }
+    background: linear-gradient(to right,#00aec7, #5ee2fe, #68d3fe);
+}
 
 .container-navbar{
     width: 100%;
@@ -49,13 +49,15 @@ align-items: center;
     width: 100px;
   }
   .middle-container #post-inst{
-    font-weight: bolder;
+    /* font-weight: bolder; */
     font-size: 1.200rem;
+    font-family: aleo ;
   }
   .middle-container h1{
     font-size: 2.200rem;
     font-weight: bolder;
     margin-left: 1.500em;
+    font-family: aleo ;
   }
 
 /* nav link btns */
@@ -82,7 +84,7 @@ align-items: center;
     text-decoration: none;
     padding: 10px 10px;
     color: #fff;
-
+    font-family: aleo ;
 }
 .nav-btn-link .nav-link .li-nav .nav-link-a #render-img{
   width: 40px;
