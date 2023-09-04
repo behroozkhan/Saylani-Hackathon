@@ -25,26 +25,10 @@ let regFlag = false;
 
 onAuthStateChanged(auth, async (user) => {
  if (user) {
-   // if(location.pathname !== "../html file/home.html" && regFlag){
-
-   // }
      const uid = user.uid;
      console.log('User uid-->', uid)
-     // location.href = '../html file/home.html'
-     // location.href = "../index.html"
-     // loader_container.style.display = 'none'
-     // createAccountContainer.style.display = 'none'
-     // content_container.style.display = 'block'
-     // getPosts()
-     // const info = await getUserInfo(uid)
-     // welcome.innerHTML = `Welcome ${info.name}`
-     // ...
  } else {
      console.log('User is not logged in')
-     // loader_container.style.display = 'none'
-     // createAccountContainer.style.display = 'block'
-     // content_container.style.display = 'none'
-
  }
 });
 

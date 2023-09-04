@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/bolt.png" type="image/png">
+    <title>User Complete profile</title>
+    <link rel="stylesheet" href="../css file/usercomplete.css">
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <div class="middle-container">
+                <a href="../index.html"><img id="main-logo" src="../images/bolt.png" alt="logo"></a>
+                <h3 id="post-inst">Post Instint</h3>
+            </div>
+
+            <div class="nav-btn-link">
+                <ul class="nav-link">
+                    <li class="li-nav">
+                        <a class="nav-link-a" href="../html file/home.html">My Blogs</a>
+                    </li class="li-nav">
+                    <li class="li-nav">
+                        <a class="nav-link-a" href="../html file/profile.html"><img id="render-img"
+                                src="../images/user-defoult.png" alt=""></a>
+                    </li>
+                    <li class="li-nav">
+                        <a class="nav-link-a" href="../index.html">logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container-head">
+            <a class="title-head" href="./allblogs.html">&#x27F8; Back to all blogs</a>
+        </div>
+    </section>
+
+
+    <section class="all-blog-container">
+        <div class="card-container">
+            <div class="card-container-underneath">
+                <h1 class="all-blog-head">All Blogs</h1>
+                <div class="post-container">
+                </div>
+            </div>
+            <!-- pofile container -->
+            <div class="card-container-underneath-profile">
+                <h1 class="all-blog-head-profile">Profile</h1>
+                <div class="post-container-profile">
+                    <div class="card-profile">
+                        <div class="img-name-profile">
+                            <img id="user-img-profile" src="../images/bk linkedin profile.jpg" alt="">
+                        </div>
+                        <div class="title-desc-container-profile">
+                            <h2 id="user-profile-name"></h2>
+                            <p id="user-profile-email"></p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!--  card-container-underneath-profile-->
+
+        </div>
+    </section>
+ 
+ 
+ 
+    <!-- loader -->
+ <main id="loader">
+    <div class="loader-title">
+      Please Wait Loading...
+    </div>
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5ebd3e" />
+          <stop offset="33%" stop-color="#ffb900" />
+          <stop offset="67%" stop-color="#f78200" />
+          <stop offset="100%" stop-color="#e23838" />
+        </linearGradient>
+        <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+          <stop offset="0%" stop-color="#e23838" />
+          <stop offset="33%" stop-color="#973999" />
+          <stop offset="67%" stop-color="#009cdf" />
+          <stop offset="100%" stop-color="#5ebd3e" />
+        </linearGradient>
+      </defs>
+      <g fill="none" stroke-linecap="round" stroke-width="16">
+        <g class="ip__track" stroke="#ddd">
+          <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+          <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+        </g>
+        <g stroke-dasharray="180 656">
+          <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+          <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+        </g>
+      </g>
+    </svg>
+  </main>
+ 
+ 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../js file/usercomplete.js"></script>
+</body>
+
+</html>

@@ -7,12 +7,22 @@
 
     <link rel="icon" href="../images/bolt.png" type="image/png">
 
-    <link rel="stylesheet" href="../css file/style.css">
-</head>
+
+
+
+<link rel="stylesheet" href="../css file/style.css">
 <body>
 
     <nav>
-        <p class="logo">Personal Blogging App</p>
+      <div class="nav-logo-name" style="display: flex; align-items: center; color: #fff;">
+        <img width="60" height="60" src="../images/bolt.png" alt="website-logo">
+        <h2>Post Instint</h2>
+
+      </div>
+        
+      
+      
+      <p class="logo">Personal Blogging App</p>
         <div class="auth-btn">
             <ul id="all-blogs-nav">
                 <li >
@@ -26,15 +36,26 @@
     <div class="heading">
         <h1 class="head-name">Dashboard</h1>
     </div>
-    <div class="container">
+    
+      <!-- modal code-->
+    <div class="modal-container">
+        <div class="modal-card">
+          <h2>Edit Post</h2>
+          <input type="text" id="edit-title" placeholder="Title">
+          <textarea id="edit_desc" class="text-control" rows="4" placeholder="Description" ></textarea>
+          <button id="update-post" class="update-post-btn">Update Post</button>
+          <button id="cancel-post" class="update-post-btn">Cancel</button>
+        </div>
+    </div>  <!-- modal container -->
+
+
+<div class="container">
         <div class="card">
             <form id="post_form">
                 <div class="input-post">
-                    <!-- <label for="exampleInputEmail1" class="form-label">Post Title</label> -->
                     <input id = "post_title" type="text" class="form-control" placeholder="Title">
                 </div>
                 <div class="input-des">
-                    <!-- <label for="post_desc" class="form-label">Post Description</label> -->
                     <textarea id="post_desc" class="form-control" rows="4" placeholder="Description"></textarea>
                     <img id="img-user" src="" alt="">
                   </div>
@@ -76,6 +97,12 @@
           </g>
         </svg>
       </main>
+
+
+
+  <!-- flowbite library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="module" src="../js file/home.js"></script>

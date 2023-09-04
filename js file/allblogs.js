@@ -7,9 +7,7 @@ import {
     onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import {
-    getFirestore, collection,
-    query, where,
-    addDoc, doc, getDoc, getDocs
+    getFirestore, collection,getDocs
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 
@@ -41,15 +39,8 @@ onAuthStateChanged(auth, async (user) => {
         getAllBlogs()
     } else {
         console.log('User is not logged in')
-
-
     }
 });
-
-
-
-
-
 
 
 const getAllBlogs = async () => {
@@ -57,7 +48,8 @@ const getAllBlogs = async () => {
     const querySnapshot = await getDocs(collection(db, "bk_blogs"));
     querySnapshot.forEach((doc) => {
         const postInfo = doc.data();
-        renderImg.innerHTML = doc.data().userImg;
+        console.log("51",postInfo);
+        renderImg.src = doc.data().userImg;
         const { postTitle, created_at, userName, postDescription, userImg } = postInfo;
         console.log("postInfo55", postInfo);
 
