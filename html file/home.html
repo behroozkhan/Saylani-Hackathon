@@ -14,8 +14,8 @@
 <body>
 
     <nav>
-      <div class="nav-logo-name" style="display: flex; align-items: center; color: #fff;">
-        <img width="60" height="60" src="../images/bolt.png" alt="website-logo">
+      <div class="nav-logo-name">
+        <img src="../images/bolt.png" alt="website-logo">
         <h2>Post Instint</h2>
 
       </div>
@@ -36,17 +36,30 @@
     <div class="heading">
         <h1 class="head-name">Dashboard</h1>
     </div>
-    
-      <!-- modal code-->
-    <div class="modal-container">
-        <div class="modal-card">
-          <h2>Edit Post</h2>
-          <input type="text" id="edit-title" placeholder="Title">
-          <textarea id="edit_desc" class="text-control" rows="4" placeholder="Description" ></textarea>
-          <button id="update-post" class="update-post-btn">Update Post</button>
-          <button id="cancel-post" class="update-post-btn">Cancel</button>
-        </div>
-    </div>  <!-- modal container -->
+
+
+
+<!-- modal updated -->
+<div class="container-modal">
+  <div class="card-modal">
+      <div id="post-form-modal">
+        <h2>Edit Post</h2>
+          <div class="input-post-modal">
+              <input id="edit-title" type="text" class="form-control-modal" placeholder="Title Hoo me">
+          </div>
+          <div class="input-des">
+              <textarea id="edit_desc" class="form-control-modal" rows="4" placeholder="Description" ></textarea>
+              <!-- <img id="img-user" src="" alt=""> -->
+              <button type="submit" class="btn btn-primary-modal" id="update-post">Update Post</button>
+              <button type="submit" class="btn btn-primary-modal" id="cancel-post">Cancel Post</button>
+            </div>
+      </div>
+  </div>
+</div>
+
+    <!-- modal updated -->
+
+
 
 
 <div class="container">
@@ -57,12 +70,15 @@
                 </div>
                 <div class="input-des">
                     <textarea id="post_desc" class="form-control" rows="4" placeholder="Description"></textarea>
-                    <img id="img-user" src="" alt="">
+                    <!-- <img id="img-user" src="" alt=""> -->
                   </div>
                 <button type="submit" class="btn btn-primary" >Publish</button>
             </form>
         </div>
     </div>
+
+
+
     <div class="blogs-container">
     </div>
      <!-- loader -->
@@ -100,8 +116,6 @@
 
 
 
-  <!-- flowbite library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

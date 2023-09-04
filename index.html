@@ -63,14 +63,13 @@
 
       <div class="navbar-end">
         <div class="btn">
-          <a id='search' href="">Search</a>
-          <button class="button-bk"><a href="./html file/login.html">Login</a><i class="fa-thin fa-arrow-up-right"></i></button>
-          <button  class="button-bk box"><a href="./html file/register.html">Sign Up</a><i class="fa-thin fa-arrow-up-right"></i></button>
-          <button  class="button-bk box"><a href="./html file/profile.html">Profile</a><i class="fa-thin fa-arrow-up-right"></i></button>
+          <a class="button-bk box" id="login-index" href="./html file/login.html">Login  &#x21D7;</a>
+          <a class="button-bk box" id="sign-up-index" href="./html file/register.html">Sign Up  &#x21D7;</a>
+          <!-- <button class="button-bk box"><a href="./html file/login.html">Login  &#x21D7;</a><i class="fa-thin fa-arrow-up-right"></i></button> -->
+          <!-- <button  class="button-bk box"><a href="./html file/register.html">Sign Up  &#x21D7;</a><i class="fa-thin fa-arrow-up-right"></i></button> -->
+          <img id="ham-menu" width="30" height="30" src="./images/bolt.png" alt="">
         </div>
-      </div>
-
-      
+      </div> 
     </div> <!-- end of first container -->
 
   </header> <!-- end for header  -->
@@ -80,13 +79,17 @@
       <div class="container-2">
         <div class="heading-intro">
           <h1>Introduction My Posting App</h1>
+          <img id="query-img" src="./images/side-main-img.png" alt="side main image">
           <p>
             Experience the future: a unified app merging login, sign-up, posts, profiles, and chat. Engage effortlessly with captivating posts, vibrant profiles, and seamless chats. Elevate your digital interactions with sleek design. Discover the new era of connection..
           </p>
           <!-- <button class="bk-button"><a href="quiz">Try Our Quizes</a></button> -->
-          <button class="bk-button">
-            <a href="./html file/home.html">Try Out Posting App<i class="fas fa-arrow-up-right"></i></a>
-          </button>
+          <div class="btn">
+            <a class="bk-button try-blog" href="./html file/home.html">Try Out Posting App &#x21D7;<i class="fas fa-arrow-up-right"></i></a>
+          </div>
+<!-- 
+          <div class="bk-button try-blog">
+          </div> -->
           <!-- ⇗ -->
         </div>
         <div class="para-rigth-img" id="try-out-button">
@@ -97,7 +100,6 @@
     </section>
   </main> 
   <script  src="script.js" type="module"></script>
-  <script type="module" src="./js file/app.js"></script>
 </body>
 
 </html>

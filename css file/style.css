@@ -42,12 +42,25 @@ nav {
   align-items: center;
   justify-content: space-between;
   position: relative;
+  /* font-family: aleo; */
+}
+
+.nav-logo-name{
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.nav-logo-name img{
+  width: 100px;
 }
 
 nav .logo {
   color: #fff;
   font-size: 18px;
   font-weight: 500;
+  font-family: aleo;
+
 }
 
 nav ul li {
@@ -57,6 +70,7 @@ nav ul li {
 nav ul li a {
   color: #fff;
   text-decoration: none;
+  font-family: aleo;
 }
 
 nav ul li {
@@ -87,12 +101,15 @@ nav ul li {
   padding: 1em;
   position: relative;
   width: 100%;
-  
+  font-family: aleo;
+  border: 1px solid black;
 }
 
 .heading .head-name {
-  margin-left: 3.800em;
- 
+  margin-left: 5em;
+  font-family: aleo;
+
+
 }
 
 .container {
@@ -103,6 +120,7 @@ nav ul li {
   padding: 2em;
 
 }
+
 
 .container .card {
   width: 660px;
@@ -128,6 +146,8 @@ nav ul li {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-family: aleo;
+
 }
 
 .container .card form button {
@@ -184,15 +204,9 @@ nav ul li {
 
 
 /* all blogs container */
-
-
 .blogs-container {
-
   margin-left: 1.600em;
   margin-top: 2em;
-
-
-
 }
 
 .card {
@@ -219,7 +233,6 @@ nav ul li {
 
 /*  */
 .blogs-container .img-name {
-
   display: flex;
   align-items: center;
   gap: 1.900em;
@@ -306,7 +319,7 @@ nav ul li {
   white-space: nowrap;
   padding: 1em;
   gap: 2em;
-
+  font-family: aleo;
 }
 
 .button-bk {
@@ -327,6 +340,7 @@ nav ul li {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+
 }
 
 .button-bk::after,
@@ -478,87 +492,57 @@ nav ul li {
   }
 }
 
+/* 
 
 
-
-.modal-container {
-  display: flex;
-  justify-content: center;
-  z-index: 1;
-  font-family: lora-italic;
+/* modal code  */
+.container-modal {
   width: 100%;
-}
-
-.modal-container .modal-card {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  padding: 2em;
-  background-color: #f0f8ff;
-  border-radius: 10px;
   position: fixed;
   z-index: 1;
-  margin-top: 10rem;
+}
+
+.card-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#post-form-modal {
+  background-color: #ccc;
+  width: 600px;
+  height: 330px;
+  padding: 15px;
+  border-radius: 10px;
   display: none;
 }
 
-.modal-container .modal-card #edit-title {
-  margin-bottom: 1rem;
-  background-color: #fff;
-  /* border: none; */
-  /* outline: none; */
-}
-
-
-.modal-container .modal-card h2 {
-  /* text-align: center; */
-  font-family: aleo;
-  font-size: 1.200rem;
+#post-form-modal h2 {
   padding: 5px;
+  margin-bottom: 5px;
+  font-family: aleo;
 }
 
-.modal-container .modal-card input {
-  background-color: #e02727;
-  margin-bottom: 1em;
-  border: 2px solid #222;
-  /* outline: none; */
-  color: #111;
-  background: transparent;
-  padding: 8px;
-  /* border: none; */
-  border-bottom: 2px solid #ccc;
-  transition: all 0.3s ease-in-out;
-}
-
-
-.modal-container .text-control {
-  text-align: left;
-  outline: none;
-  /* color: #111; */
-  background: transparent;
-  padding: 8px;
-  border: none;
-  background-color: #fff;
-  /* border-bottom: 2px solid #ccc; */
-  transition: all 0.3s ease-in-out;
-  border-radius: 5px;
-}
-
-
-.modal-container .modal-card #edit-title {
-  margin-bottom: 1em;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-}
-
-.modal-container .modal-card .update-post-btn {
-  background-color: #007bff;
-  margin-top: 1em;
+.input-post-modal input[type='text'],
+.input-des textarea {
+  width: 100%;
   padding: 10px;
-  font-family: lora;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  color: #fff;
+  margin-bottom: 10px;
+  font-family: aleo;
 }
 
+.input-des .btn-primary-modal {
+  width: 100%;
+  background-color: #0056b3;
+  margin-bottom: 10px;
+  font-family: aleo;
+  cursor: pointer;
+}
 
+.input-des #cancel-post {
+  width: 100%;
+  background-color: #eb2431;
+  margin-bottom: 10px;
+}
