@@ -300,7 +300,7 @@ align-items: center;
 #loader{
     display: none;
       position: absolute;
-    margin-right: 2em;
+    margin-left: 35em;
   }
   
   .ip {

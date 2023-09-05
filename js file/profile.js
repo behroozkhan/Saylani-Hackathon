@@ -80,7 +80,6 @@ let getUserInfo = async (uid) => {
       userProfile.src = doc.data().userProfileImgUrl;
       console.log("userprofile",userProfile);
     }
-    console.log(" doc.data()==>8888", doc.data());
   });
   loader.style.display = 'none';
   cameraImg.style.backgroundColor = '#f1ecec'
